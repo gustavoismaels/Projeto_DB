@@ -8,6 +8,7 @@ Lucas Cavalcante:
 Gustavo Ismael:
 
 #ARQUIVOS DO MATERIAL:
+
 -- T1( ROLLBACK E COMMIT)
 
 -- T2 (DISPUTA DE VAGA)
