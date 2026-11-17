@@ -9,5 +9,5 @@ Gustavo Ismael:
 Arquivos)
 -T1 e T2
 -BackUp
--Evidencias
+-Evidencias (obs: as evidencias esta no pull requesto por conta do erro no proprio git hub)
 
