@@ -1,0 +1,98 @@
+(criar banco de dados: Projeto_DB no Postgree_sql)
+
+CREATE SCHEMA lab_inscricoes;                
+===============================================
+
+CREATE TABLE lab_inscricoes.estudantes (    
+    id_estudante INTEGER PRIMARY KEY,       
+    nome TEXT NOT NULL                      
+);
+
+
+==================================================
+
+
+CREATE TABLE lab_inscricoes.atividades (
+    id_atividade INTEGER PRIMARY KEY,                     
+    nome TEXT NOT NULL,                                 
+    capacidade INTEGER NOT NULL CHECK (capacidade > 0)    
+);
+==================================================
+
+
+CREATE TABLE lab_inscricoes.inscricoes (
+    id_inscricao INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,   
+    id_estudante INTEGER NOT NULL,                                   
+    id_atividade INTEGER NOT NULL,                                   
+    situacao TEXT NOT NULL DEFAULT 'ativa',                         
+
+    FOREIGN KEY (id_estudante)                                       
+        REFERENCES lab_inscricoes.estudantes(id_estudante),          
+
+    FOREIGN KEY (id_atividade)
+        REFERENCES lab_inscricoes.atividades(id_atividade),         
+
+    CHECK (situacao IN ('ativa', 'cancelada'))                       
+);
+==================================================
+Inserçao dos estudantes na tabela:
+
+INSERT INTO lab_inscricoes.estudantes      
+    (id_estudante, nome)                   
+VALUES                                     
+    (1, 'Vitor Mariano'),
+    (2, 'Lara Manuela'),
+    (3, 'Suzuki Rocha'),
+    (4, 'Ana Castela'),
+    (5, 'Luan de roca'),
+    (6, 'Yasmin Andrade'),
+    (7, 'Gabriela Rocha'),
+    (8, 'Ana Moura'),
+    (9, 'Ruan Vitor'),
+    (10, 'Samuel Cardoso');
+==================================================
+
+
+INSERT INTO lab_inscricoes.atividades
+    (id_atividade, nome, capacidade)
+VALUES
+    (1, 'Banco de Dados', 1),              
+    (2, 'Python', 20),
+    (3, 'Engenharia de Software', 15);
+
+==================================================
+ROLLBACK//
+
+BEGIN; 
+
+UPDATE lab_inscricoes.atividades                      
+SET nome = 'Mudar Nome _Rollback'      
+WHERE id_atividade = 1;                               
+
+SELECT id_atividade, nome 
+FROM lab_inscricoes.atividades
+WHERE id_atividade = 1;                              
+
+ROLLBACK;                                             
+
+SELECT id_atividade, nome 
+FROM lab_inscricoes.atividades
+WHERE id_atividade = 1;                              
+==================================================
+ COMMIT//
+
+BEGIN;                                               
+
+UPDATE lab_inscricoes.atividades
+SET nome = 'Postgree_sql'                      
+WHERE id_atividade = 1;
+
+SELECT id_atividade, nome
+FROM lab_inscricoes.atividades
+WHERE id_atividade = 1;                               
+
+COMMIT;                                               
+
+SELECT id_atividade, nome
+FROM lab_inscricoes.atividades
+WHERE id_atividade = 1;                              
