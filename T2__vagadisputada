@@ -1,0 +1,55 @@
+UPDATE lab_inscricoes.inscricoes           
+SET situacao = 'anulada'
+WHERE id_atividade = 1 AND situacao = 'aberta';
+
+SHOW transaction_isolation;                 
+
+SELECT capacidade                            
+FROM lab_inscricoes.atividades
+WHERE id_atividade = 1;
+==============================================================
+1-- GUIA A:
+
+BEGIN;                                      
+
+SELECT COUNT(*) AS inscricoes_ativas         
+FROM lab_inscricoes.inscricoes
+WHERE id_atividade = 1 AND situacao = 'aberta';
+                                             
+==============================================================
+2-- GUIA B:
+
+BEGIN;                                       
+
+SELECT COUNT(*) AS inscricoes_ativas         
+FROM lab_inscricoes.inscricoes
+WHERE id_atividade = 1 AND situacao = 'aberta';
+                                           
+==============================================================
+3-- GUIA A:
+
+INSERT INTO lab_inscricoes.inscricoes        
+    (id_estudante, id_atividade, situacao)
+VALUES (1, 1, 'aberta');
+
+COMMIT;                                      
+==============================================================
+4-- GUIA B:
+
+INSERT INTO lab_inscricoes.inscricoes       
+    (id_estudante, id_atividade, situacao)
+VALUES (2, 1, 'aberta');
+
+COMMIT;                                    
+==============================================================
+VERIFICAR: )QUALQUER GUIA)
+
+SELECT COUNT(*) AS inscricoes_ativas        
+FROM lab_inscricoes.inscricoes
+WHERE id_atividade = 1 AND situacao = 'aberta';
+
+SELECT i.id_inscricao, e.nome, a.nome AS atividade, a.capacidade, i.situacao   
+FROM lab_inscricoes.inscricoes i
+JOIN lab_inscricoes.estudantes e ON e.id_estudante = i.id_estudante
+JOIN lab_inscricoes.atividades a ON a.id_atividade = i.id_atividade
+WHERE i.id_atividade = 1 AND i.situacao = 'aberta';
