@@ -1,4 +1,4 @@
-Trabalho de Bando de Dados//Entrega parcial (16/11)
+#Trabalho de Bando de Dados//Entrega parcial (16/11)
 
 
 Integrantes)
@@ -7,11 +7,11 @@ Lucas Cavalcante:
 
 Gustavo Ismael:
 
-Arquivos)
+#ARQUIVOS DO MATERIAL:
+-- T1( ROLLBACK E COMMIT)
 
--T1 e T2
+-- T2 (DISPUTA DE VAGA)
 
--BackUp
+--BACKUP DOS CODIGOS
 
--Evidencias (obs: as evidencias esta no pull requesto por conta do erro no proprio git hub)
-
+--EVIDENCIAS NA SEGUNDA MAIN CRIADA
